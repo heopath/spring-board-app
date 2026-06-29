@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 속성은 해당 매퍼파일을 연결할 매퍼클래스(DAO) 설정(패키지포함) -->
+<mapper namespace="ko.co.sboard.springboardapp.dao.FileDAO">
+
+    <!-- id값은 DAO의 메서드명으로 맞춰줌 -->
+    <select id="select">
+
+    </select>
+
+    <select id="selectAll">
+    </select>
+
+    <insert id="insert">
+
+    </insert>
+
+    <update id="update">
+
+    </update>
+
+    <delete id="delete">
+
+    </delete>
+</mapper>

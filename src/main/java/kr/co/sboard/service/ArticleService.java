@@ -13,6 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class ArticleService {
+
     private final ArticleDAO dao;
     private final ArticleRepository repository;
 
@@ -22,11 +23,15 @@ public class ArticleService {
     public List<ArticleDTO> getAll(){
         return null;
     }
+
     public void register(ArticleDTO dto){
-    }
-    public void modify(ArticleDTO dto){
-    }
-    public void remove(int ano){
+        dao.insert(dto);
     }
 
+    public void modify(ArticleDTO dto){
+
+    }
+    public void remove(int ano){
+
+    }
 }

@@ -12,8 +12,8 @@ import lombok.*;
 public class FileDTO {
     private int fno;
     private int ano;
-    private String ofanme;
-    private String sfanme;
+    private String ofname;
+    private String sfname;
     private int download;
     private String wdate;
 
@@ -21,8 +21,8 @@ public class FileDTO {
         return File.builder()
                 .fno(fno)
                 .ano(ano)
-                .ofanme(ofanme)
-                .sfanme(sfanme)
+                .ofanme(ofname)
+                .sfanme(sfname)
                 .download(download)
                 .build();
     }

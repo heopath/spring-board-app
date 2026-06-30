@@ -11,7 +11,7 @@ public interface UserDAO {
 
     public void insert(UserDTO dto);
 
-    public ArticleDTO select(int userid);
+    public UserDTO select(String userid);
 
     public List<UserDTO> selectAll();
 

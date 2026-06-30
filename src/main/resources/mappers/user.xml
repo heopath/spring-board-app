@@ -6,15 +6,15 @@
 <mapper namespace="kr.co.sboard.dao.UserDAO">
 
     <!-- id값은 DAO의 메서드명으로 맞춰줌 -->
-    <select id="select">
-
+    <select id="select" resultType="kr.co.sboard.entity.User">
+        SELECT * FROM User WHERE userid = #{userid}
     </select>
 
     <select id="selectAll">
     </select>
 
     <insert id="insert">
-        INSERT INTO user SET
+        INSERT INTO User SET
                             userid=#{userid},
                             pass=#{pass},
                             name=#{name},

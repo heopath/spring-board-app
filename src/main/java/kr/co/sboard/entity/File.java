@@ -30,8 +30,8 @@ public class File {
         return FileDTO.builder()
                 .fno(fno)
                 .ano(ano)
-                .ofanme(ofanme)
-                .sfanme(sfanme)
+                .ofname(ofanme)
+                .sfname(sfanme)
                 .download(download)
                 .wdate(wdate.toString())
                 .build();

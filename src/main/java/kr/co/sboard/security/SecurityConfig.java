@@ -14,7 +14,6 @@ import org.springframework.security.web.SecurityFilterChain;
      - 인증 및 인가 처리 설정
      - 기타 시큐리티 설정
 */
-
 @EnableMethodSecurity
 @Configuration
 public class SecurityConfig {
@@ -25,7 +24,7 @@ public class SecurityConfig {
         // 로그인 설정
         httpSecurity.formLogin( form -> form
                 .loginPage("/user/login")
-                .defaultSuccessUrl("/?login=success")
+                .defaultSuccessUrl("/article/list")
                 .failureUrl("/user/login?login=fail")
                 .usernameParameter("userid")
                 .passwordParameter("pass")
@@ -39,21 +38,13 @@ public class SecurityConfig {
         );
 
         // 인가 설정
-
         httpSecurity.authorizeHttpRequests( authorize -> authorize
-// 💡 정적 리소스(CSS, 이미지) 및 로그인/약관/회원가입 주소를 명시적으로 방화벽에서 제외합니다.
-                        .requestMatchers("/", "/user/login", "/user/terms", "/user/register", "/find/**").permitAll()
-                        .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
-
-                        // 기존 권한 설정 유지
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/manager/**").hasAnyRole("ADMIN", "MANAGER")
-                        .requestMatchers("/member/**").hasAnyRole("ADMIN", "MANAGER", "MEMBER")
-
-                        // 그 외의 모든 요청 허용
-                        .anyRequest().permitAll()
+                .requestMatchers("/").permitAll() // 루트(/) 경로는 인증없이 모든 요청 허용
+                .requestMatchers("/article/**").hasAnyRole("ADMIN", "MANAGER", "MEMBER")
+                //.requestMatchers("/manager/**").hasAnyRole("ADMIN", "MANAGER")
+                //.requestMatchers("/member/**").hasAnyRole("ADMIN", "MANAGER", "MEMBER")
+                .anyRequest().permitAll()
         );
-
 
         // 기타 보안 설정
         httpSecurity.csrf(CsrfConfigurer::disable);

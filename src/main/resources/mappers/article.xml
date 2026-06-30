@@ -14,7 +14,14 @@
     </select>
 
     <insert id="insert">
-
+        INSERT INTO Article SET
+        type='free',
+        title=#{title},
+        content=#{content},
+        file=#{file},
+        writer=#{writer},
+        regip=#{regip},
+        wdate=NOW();
     </insert>
 
     <update id="update">

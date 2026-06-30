@@ -4,17 +4,14 @@ plugins {
     id 'io.spring.dependency-management' version '1.1.7'
 }
 
-group = 'ko.co.sboard'
-version = '0.0.2-SNAPSHOT'
+group = 'kr.co.sboard'
+version = '0.0.3-SNAPSHOT'
 description = 'spring-board-app'
 
-//
+// Gradle version값을 SpringBoot application.properties 파일에서 참조하기 위한 Gradle 스크립트 코드
 processResources {
     filesMatching('**/application.properties') {
-        expand(
-                'description': project.description,
-                'version': project.version
-        )
+        expand(project.properties)
     }
 }
 
@@ -35,6 +32,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.5'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'com.mysql:mysql-connector-j'
@@ -46,6 +44,7 @@ dependencies {
     testCompileOnly 'org.projectlombok:lombok'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     testAnnotationProcessor 'org.projectlombok:lombok'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
 }
 
 tasks.named('test') {

@@ -5,13 +5,16 @@ plugins {
 }
 
 group = 'ko.co.sboard'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.2-SNAPSHOT'
 description = 'spring-board-app'
 
 //
-processResources{
-    filesMatching('**/application.properties'){
-        expand(project.properties)
+processResources {
+    filesMatching('**/application.properties') {
+        expand(
+                'description': project.description,
+                'version': project.version
+        )
     }
 }
 

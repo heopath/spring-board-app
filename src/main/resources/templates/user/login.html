@@ -7,18 +7,14 @@
 </head>
 <body>
     <div id="wrapper">
-        <header>
-            <h3>
-                <a href="../index" class="title">Board Project</a>
-            </h3>
-        </header>
+        <th:block th:include="~{/user/_head.html}"/>
         <main id="user">
             <section class="login">
                 <form action="../article/list">
                     <table border="0">
                         <tr>
                             <td><img src="../images/login_ico_id.png" alt="아이디"/></td>
-                            <td><input type="text" name="uid" placeholder="아이디 입력"/></td>
+                            <td><input type="text" name="userid" placeholder="아이디 입력"/></td>
                         </tr>
                         <tr>
                             <td><img src="../images/login_ico_pw.png" alt="비밀번호"/></td>
@@ -36,17 +32,12 @@
                     <div style="text-align: right;">
                         <a href="../find/userId">아이디 |</a>
                         <a href="../find/password">비밀번호찾기 |</a>
-                        <a href="./terms">회원가입</a>
+                        <a th:href="@{/user/terms}">회원가입</a>
                     </div>
                 </div>
             </section>
         </main>
-        <footer>
-            <p>
-                <span class="copyright">Copyrightⓒ 허민재(개발에반하다.)</span>
-                <span class="version">[[${@appInfoDTO.appName}]]-[[${@appInfoDTO.appVersion}]]</span>
-            </p>
-        </footer>
+        <th:block th:include="~{/user/_tail.html}"/>
     </div>
 </body>
 </html>

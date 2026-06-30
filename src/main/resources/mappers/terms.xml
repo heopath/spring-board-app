@@ -2,26 +2,22 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- namespace 속성은 해당 매퍼파일을 연결할 매퍼클래스(DAO) 설정(패키지포함) -->
-<mapper namespace="ko.co.sboard.springboardapp.dao.TermsDAO">
+<mapper namespace="kr.co.sboard.dao.TermsDAO">
 
-    <!-- id값은 DAO의 메서드명으로 맞춰줌 -->
-    <select id="select">
-
+    <select id="select" resultType="kr.co.sboard.dto.TermsDTO">
+        SELECT * FROM Terms WHERE no=#{no}
     </select>
 
-    <select id="selectAll">
+    <select id="selectAll" resultType="kr.co.sboard.dto.TermsDTO">
+        SELECT * FROM Terms
     </select>
 
     <insert id="insert">
-
     </insert>
 
     <update id="update">
-
     </update>
 
     <delete id="delete">
-
     </delete>
 </mapper>

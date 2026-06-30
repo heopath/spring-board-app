@@ -23,27 +23,27 @@ public class ArticleController {
 
     @GetMapping("/article/list")
     public String list(){
-        return "/article/list";
+        return "article/list";
     }
 
     @GetMapping("/article/modify")
     public String modify(){
-        return "/article/modify";
+        return "article/modify";
     }
 
     @GetMapping("/article/search")
     public String search(){
-        return "/article/search";
+        return "article/search";
     }
 
     @GetMapping("/article/view")
     public String view(){
-        return "/article/view";
+        return "article/view";
     }
 
     @GetMapping("/article/write")
     public String write(){
-        return "/article/write";
+        return "article/write";
     }
 
     @PostMapping("/article/write")
@@ -62,6 +62,6 @@ public class ArticleController {
         // 글등록
         articleService.register(articleDTO);
 
-        return "redirect:/article/list";
+        return "redirect:article/list";
     }
 }

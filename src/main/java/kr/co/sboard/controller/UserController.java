@@ -1,6 +1,5 @@
 package kr.co.sboard.controller;
 
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -35,16 +34,20 @@ public class UserController {
 
     @GetMapping("/user/info")
     public String info(){
-        return "/user/info";
+        // ⭕ 맨 앞 슬래시 제거
+        return "user/info";
     }
+
     @GetMapping("/user/login")
     public String login(){
-        return "/user/login";
+        // ⭕ 맨 앞 슬래시 제거 완료 상태
+        return "user/login";
     }
 
     @GetMapping("/user/register")
     public String register(){
-        return "/user/register";
+        // ⭕ 맨 앞 슬래시 제거
+        return "user/register";
     }
 
     @PostMapping("/user/register")
@@ -58,14 +61,12 @@ public class UserController {
         // 등록 서비스 호출
         userService.register(userDTO);
 
-        // 로그인 이동
+        // 💡 redirect: 뒤의 주소 체계는 URL 경로이므로 슬래시를 유지하는 것이 맞습니다.
         return "redirect:/user/login?register=success";
     }
 
-
     @GetMapping("/user/terms")
     public String terms(Model model){
-
         // 약관 조회 서비스 호출
         TermsDTO termsDTO = termsService.get(1);
         log.info(termsDTO);
@@ -73,7 +74,8 @@ public class UserController {
         // 모델 참조
         model.addAttribute(termsDTO);
 
-        return "/user/terms";
+        // ⭕ 맨 앞 슬래시 제거
+        return "user/terms";
     }
 
     @ResponseBody

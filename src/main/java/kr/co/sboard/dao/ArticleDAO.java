@@ -1,6 +1,7 @@
 package kr.co.sboard.dao;
 
 import kr.co.sboard.dto.ArticleDTO;
+import kr.co.sboard.dto.PageRequestDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -12,7 +13,9 @@ public interface ArticleDAO {
 
     public ArticleDTO select(int ano);
 
-    public List<ArticleDTO> selectAll();
+    public List<ArticleDTO> selectAll(int start);
+
+    public int selectCountAll();
 
     public void update(ArticleDTO dto);
 

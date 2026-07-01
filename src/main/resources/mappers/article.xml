@@ -11,6 +11,13 @@
     </select>
 
     <select id="selectAll">
+        SELECT
+        a.*,
+        u.nick
+        FROM Article a
+        JOIN User u ON a.writer = u.userid
+        ORDER BY a.ano DESC
+        LIMIT #{pageRequestDTO.start}, 10;
     </select>
 
     <insert id="insert">
@@ -23,6 +30,10 @@
         regip=#{regip},
         wdate=NOW();
     </insert>
+
+    <select id="selectCountAll">
+        SELECT COUNT(*) FROM Article;
+    </select>
 
     <update id="update">
 

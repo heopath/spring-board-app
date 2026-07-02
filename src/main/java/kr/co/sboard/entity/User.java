@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name="User")
+@Table(name = "user")
 public class User {
 
     @Id
@@ -35,6 +35,7 @@ public class User {
     private LocalDateTime regDate;
 
     private LocalDateTime leaveDate;
+
     public UserDTO toDTO(){
         return UserDTO.builder()
                 .userid(userid)
@@ -52,4 +53,5 @@ public class User {
                 .leaveDate(leaveDate.toString())
                 .build();
     }
+
 }

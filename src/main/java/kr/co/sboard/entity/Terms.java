@@ -10,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name="Terms")
+@Table(name = "terms")
 public class Terms {
 
     @Id
@@ -26,4 +26,5 @@ public class Terms {
                 .privacy(privacy)
                 .build();
     }
+
 }

@@ -13,27 +13,28 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name="File")
+@Table(name = "file")
 public class File {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int fno;
     private int ano;
-    private String ofanme;
-    private String sfanme;
+    private String ofname;
+    private String sfname;
     private int download;
+
     @CreationTimestamp
-    private LocalDateTime wdate;
+    private LocalDateTime rdate;
 
     public FileDTO toDTO(){
         return FileDTO.builder()
                 .fno(fno)
                 .ano(ano)
-                .ofname(ofanme)
-                .sfname(sfanme)
+                .ofname(ofname)
+                .sfname(sfname)
                 .download(download)
-                .wdate(wdate.toString())
                 .build();
     }
+
 }

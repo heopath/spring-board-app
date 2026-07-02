@@ -2,6 +2,7 @@ package kr.co.sboard.service;
 
 import kr.co.sboard.dto.ArticleDTO;
 import kr.co.sboard.dto.PageRequestDTO;
+import kr.co.sboard.dto.PageResponseDTO;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,15 +20,15 @@ class ArticleServiceTest {
     private ArticleService service;
 
     @Test
-    void findAll() {
+    void getAll(){
+
         PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
-                .page(2)
+                .page(1)
                 .build();
 
-        List<ArticleDTO> dtoList = service.findAll(pageRequestDTO);
+        PageResponseDTO pageResponseDTO = service.getAll(pageRequestDTO);
 
-        for (ArticleDTO dto : dtoList) {
-            log.info(dto);
-        }
+        log.info(pageResponseDTO);
     }
+
 }

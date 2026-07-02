@@ -31,12 +31,12 @@ public class PageRequestDTO {
     @Builder.Default
     private int start = 0;
 
-    public int getOffset(){
+    public int getStart(){
         return (page - 1) * size;
     }
-    // JPA에서 페이지 처리를 위한 Pageable 설정
+
+    // JPA에서 페이징 처리를 위한 Pageable 생성
     public Pageable getPageable(String sort){
         return PageRequest.of(this.page - 1, this.size, Sort.by(sort).descending());
     }
-
 }

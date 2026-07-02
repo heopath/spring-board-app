@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name="Comment")
+@Table(name = "comment")
 public class Comment {
 
     @Id
@@ -23,10 +23,11 @@ public class Comment {
     private String content;
     private String writer;
     private String regip;
+
     @CreationTimestamp
     private LocalDateTime wdate;
 
-    public CommentDTO toDTO() {
+    public CommentDTO toDTO(){
         return CommentDTO.builder()
                 .cno(cno)
                 .parent(parent)

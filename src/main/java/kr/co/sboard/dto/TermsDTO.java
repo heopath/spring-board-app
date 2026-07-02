@@ -16,10 +16,11 @@ public class TermsDTO {
     private String privacy;
 
     public Terms toEntity(){
-        return TermsDTO.builder()
+        return Terms.builder()
                 .no(no)
                 .basic(basic)
                 .privacy(privacy)
-                .build().toEntity();
+                .build();
     }
+
 }

@@ -27,6 +27,7 @@ public class ArticleDTO {
 
     // 추가필드
     private String nick;
+    private List<FileDTO> fileList;
 
     // 폼 업로드 파일 객체
     private MultipartFile file1;
@@ -46,7 +47,6 @@ public class ArticleDTO {
                 .comment(comment)
                 .file(file)
                 .hit(hit)
-                .writer(writer)
                 .regip(regip)
                 .build();
     }

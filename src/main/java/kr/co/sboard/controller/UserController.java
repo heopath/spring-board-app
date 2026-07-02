@@ -1,5 +1,6 @@
 package kr.co.sboard.controller;
 
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -34,20 +35,16 @@ public class UserController {
 
     @GetMapping("/user/info")
     public String info(){
-        // ⭕ 맨 앞 슬래시 제거
-        return "user/info";
+        return "/user/info";
     }
-
     @GetMapping("/user/login")
     public String login(){
-        // ⭕ 맨 앞 슬래시 제거 완료 상태
-        return "user/login";
+        return "/user/login";
     }
 
     @GetMapping("/user/register")
     public String register(){
-        // ⭕ 맨 앞 슬래시 제거
-        return "user/register";
+        return "/user/register";
     }
 
     @PostMapping("/user/register")
@@ -61,21 +58,22 @@ public class UserController {
         // 등록 서비스 호출
         userService.register(userDTO);
 
-        // 💡 redirect: 뒤의 주소 체계는 URL 경로이므로 슬래시를 유지하는 것이 맞습니다.
+        // 로그인 이동
         return "redirect:/user/login?register=success";
     }
-
+    
+    
     @GetMapping("/user/terms")
     public String terms(Model model){
+        
         // 약관 조회 서비스 호출
         TermsDTO termsDTO = termsService.get(1);
         log.info(termsDTO);
 
         // 모델 참조
         model.addAttribute(termsDTO);
-
-        // ⭕ 맨 앞 슬래시 제거
-        return "user/terms";
+        
+        return "/user/terms";
     }
 
     @ResponseBody
@@ -87,9 +85,8 @@ public class UserController {
         int count = userService.getCount(dto);
 
         if(dto.getType().equals("email") && count == 0){
-            int code = emailService.sendCode(dto.getValue());
-            System.out.println("============== 발송된 인증코드: " + code + " ==============");
-            session.setAttribute("sessCode", String.valueOf(code));
+            String code = emailService.sendCode(dto.getValue());
+            session.setAttribute("sessCode", code);
         }
 
         return ResponseEntity

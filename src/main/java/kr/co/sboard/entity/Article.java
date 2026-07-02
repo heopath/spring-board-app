@@ -5,7 +5,9 @@ import kr.co.sboard.dto.ArticleDTO;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.awt.image.WritableRaster;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @ToString
@@ -13,7 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name="Article")
+@Table(name = "article")
 public class Article {
 
     @Id
@@ -25,10 +27,18 @@ public class Article {
     private int comment;
     private int file;
     private int hit;
-    private String writer;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "writer")
+    private User user;
+
     private String regip;
+
     @CreationTimestamp
     private LocalDateTime wdate;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "ano")
+    private List<File> fileList;
 
     public ArticleDTO toDTO(){
         return ArticleDTO.builder()
@@ -39,7 +49,7 @@ public class Article {
                 .comment(comment)
                 .file(file)
                 .hit(hit)
-                .writer(writer)
+                .nick(user.getNick())
                 .regip(regip)
                 .wdate(wdate.toString())
                 .build();

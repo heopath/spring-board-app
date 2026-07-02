@@ -13,4 +13,5 @@ public class AppInfoDTO {
 
     @Value("${spring.application.version}")
     private String appVersion;
+
 }

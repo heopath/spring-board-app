@@ -23,12 +23,12 @@ public class SecurityConfig {
 
         // 로그인 설정
         httpSecurity.formLogin( form -> form
-                .loginPage("/user/login")
-                .defaultSuccessUrl("/article/list")
-                .failureUrl("/user/login?login=fail")
-                .usernameParameter("userid")
-                .passwordParameter("pass")
-        );
+                        .loginPage("/user/login")
+                        .defaultSuccessUrl("/article/list")
+                        .failureUrl("/user/login?login=fail")
+                        .usernameParameter("userid")
+                        .passwordParameter("pass")
+                );
 
         // 로그아웃 설정
         httpSecurity.logout( config -> config
@@ -58,6 +58,7 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 }
+
 
 
 

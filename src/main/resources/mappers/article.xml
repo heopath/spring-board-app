@@ -5,10 +5,59 @@
 <!-- namespace 속성은 해당 매퍼파일을 연결할 매퍼클래스(DAO) 설정(패키지포함) -->
 <mapper namespace="kr.co.sboard.dao.ArticleDAO">
 
-    <!-- id값은 DAO의 메서드명으로 맞춰줌 -->
-    <select id="select">
+    <!-- resultMap은 Mybatis의 조회결과를 DTO와 컬럼을 맵핑하기 위한 태그설정 -->
+    <resultMap id="articleMap" type="kr.co.sboard.dto.ArticleDTO">
+        <id property="ano" column="ano"/>
+        <result property="type" column="type"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="comment" column="comment"/>
+        <result property="file" column="file"/>
+        <result property="hit" column="hit"/>
+        <result property="writer" column="writer"/>
+        <result property="regip" column="regip"/>
+        <result property="wdate" column="wdate"/>
+        <result property="nick" column="nick"/>
 
+        <!-- List 속성을 바인딩하는 Mybatis collection -->
+        <collection property="fileList" ofType="kr.co.sboard.dto.FileDTO">
+            <id property="fno" column="fno"/>
+            <result property="ano" column="ano"/>
+            <result property="ofname" column="ofname"/>
+            <result property="sfname" column="sfname"/>
+            <result property="download" column="download"/>
+            <result property="rdate" column="rdate"/>
+        </collection>
+    </resultMap>
+
+    <select id="select" resultMap="articleMap"><!-- 조회결과를 articleMap으로 출력 -->
+        SELECT
+        a.*,
+        u.nick,
+        f.*
+        FROM article a
+        JOIN user u ON a.writer = u.userid
+        LEFT JOIN file f ON a.ano = f.ano
+        WHERE a.ano=#{ano};
     </select>
+
+    <sql id="searchWhere">
+        <where>
+            <if test="pageRequestDTO.searchType != null and pageRequestDTO.keyword != null">
+                <choose>
+                    <when test="pageRequestDTO.searchType == 'title'">
+                        AND a.title LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
+                    </when>
+                    <when test="pageRequestDTO.searchType == 'content'">
+                        AND a.content LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
+                    </when>
+                    <when test="pageRequestDTO.searchType == 'writer'">
+                        AND u.nick LIKE CONCAT('%', #{pageRequestDTO.keyword}, '%')
+                    </when>
+                </choose>
+            </if>
+        </where>
+    </sql>
 
     <select id="selectAll">
         SELECT
@@ -16,11 +65,12 @@
         u.nick
         FROM Article a
         JOIN User u ON a.writer = u.userid
+        <include refid="searchWhere"/>
         ORDER BY a.ano DESC
         LIMIT #{pageRequestDTO.start}, 10;
     </select>
 
-    <insert id="insert">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="ano">
         INSERT INTO Article SET
         type='free',
         title=#{title},
@@ -32,7 +82,9 @@
     </insert>
 
     <select id="selectCountAll">
-        SELECT COUNT(*) FROM Article;
+        SELECT COUNT(*) FROM article a
+        JOIN user u ON a.writer = u.userid
+        <include refid="searchWhere"/>
     </select>
 
     <update id="update">
